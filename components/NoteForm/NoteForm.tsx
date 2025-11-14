@@ -1,16 +1,13 @@
 'use client';
 
-import { addNote } from '@/lib/api/api';
 import type { NewNoteData } from '../../types/note';
-// import { Loader } from '../Loader/Loader';
 import css from './NoteForm.module.css';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-// import { Formik, Form, Field, ErrorMessage } from 'formik';
-// import * as Yup from 'yup';
 import { Loader } from '../Loader/Loader';
 import { useEffect, useState } from 'react';
 import { useNoteDraftStore } from '@/lib/store/noteStore';
 import { useRouter } from 'next/navigation';
+import { addNote } from '@/lib/api/clientApi';
 
 export function NoteForm() {
   const queryClient = useQueryClient();
