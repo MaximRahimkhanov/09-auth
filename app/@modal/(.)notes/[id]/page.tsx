@@ -1,6 +1,7 @@
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
-import { fetchNoteById } from '@/lib/api';
 import NotePreview from './NotePreview.client';
+import { fetchNoteById } from '@/lib/api/serverApi';
+import { cookies } from 'next/headers';
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -8,13 +9,14 @@ type Props = {
 
 const NoteDetails = async ({ params }: Props) => {
   const { id } = await params;
+  const cookie = cookies().toString();
   // if (!id) notFound();
 
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
     queryKey: ['note', id],
-    queryFn: () => fetchNoteById(id),
+    queryFn: () => fetchNoteById(id, cookie),
   });
 
   return (

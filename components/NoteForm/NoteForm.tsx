@@ -1,6 +1,6 @@
 'use client';
 
-import { addNote } from '@/lib/api';
+import { addNote } from '@/lib/api/api';
 import type { NewNoteData } from '../../types/note';
 // import { Loader } from '../Loader/Loader';
 import css from './NoteForm.module.css';
