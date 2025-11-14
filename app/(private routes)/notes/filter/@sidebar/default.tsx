@@ -8,7 +8,6 @@ export interface Tag {
 export const tags = ['Work', 'Personal', 'Meeting', 'Shopping', 'Todo'];
 
 export default function SidebarNotes() {
-  console.log('render');
   return (
     <ul className={css.menuList}>
       <li className={css.menuItem}>

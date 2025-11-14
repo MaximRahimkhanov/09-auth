@@ -19,7 +19,6 @@ const SignIn = () => {
       if (user) {
         setUser(user);
         router.push('/profile');
-        console.log(user);
       } else {
         setError('Invalid email or password');
       }

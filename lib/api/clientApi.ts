@@ -120,7 +120,7 @@ export const checkSession = async () => {
 
 export const getMe = async () => {
   const { data } = await api.get<User>('/users/me');
-  console.log('GETME');
+
   return data;
 };
 
