@@ -7,7 +7,7 @@ import { Loader } from '../Loader/Loader';
 import { useEffect, useState } from 'react';
 import { useNoteDraftStore } from '@/lib/store/noteStore';
 import { useRouter } from 'next/navigation';
-import { addNote } from '@/lib/api/clientApi';
+import { createNote } from '@/lib/api/clientApi';
 
 export function NoteForm() {
   const queryClient = useQueryClient();
@@ -21,7 +21,7 @@ export function NoteForm() {
   });
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async (newNoteData: NewNoteData) => await addNote(newNoteData),
+    mutationFn: async (newNoteData: NewNoteData) => await createNote(newNoteData),
 
     onSuccess: () => {
       queryClient.invalidateQueries({

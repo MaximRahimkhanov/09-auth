@@ -47,7 +47,6 @@ export async function POST(request: NextRequest) {
     const res = await api.post('/notes', body, {
       headers: {
         Cookie: cookieStore.toString(),
-        'Content-Type': 'application/json',
       },
     });
 

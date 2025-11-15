@@ -66,11 +66,7 @@ const EditProfilePage = () => {
             <button type="submit" className={css.saveButton}>
               Save
             </button>
-            <button
-              type="button"
-              onClick={() => router.push('/profile')}
-              className={css.cancelButton}
-            >
+            <button type="button" onClick={() => router.back()} className={css.cancelButton}>
               Cancel
             </button>
           </div>

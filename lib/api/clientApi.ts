@@ -8,8 +8,6 @@ export type ResponseData = {
   totalPages: number;
 };
 
-const token = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
-
 export async function fetchNotes({
   searchText = '',
   page = 1,
@@ -28,70 +26,33 @@ export async function fetchNotes({
       perPage,
       ...(tag && tag !== 'all' ? { tag } : {}),
     },
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
   });
 
   return data;
 }
 
 export async function fetchNoteById(noteId: string): Promise<Note> {
-  const { data } = await api.get<Note>(
-    `/api/notes/${noteId}`,
-
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-    }
-  );
+  const { data } = await api.get<Note>(`/notes/${noteId}`);
 
   return data;
 }
 
 export async function deleteNote(noteId: string): Promise<Note> {
-  const { data } = await api.delete<Note>(
-    `/api/notes/${noteId}`,
-
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-    }
-  );
+  const { data } = await api.delete<Note>(`/notes/${noteId}`);
 
   return data;
 }
 
-export async function addNote(newNoteData: NewNoteData): Promise<Note> {
-  const { data } = await api.post<Note>('/api/notes', newNoteData, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-  });
+export async function createNote(newNoteData: NewNoteData): Promise<Note> {
+  const { data } = await api.post<Note>('/notes', newNoteData, {});
 
   return data;
-}
-
-export async function fetchNoteByTag(tag?: string): Promise<Note[]> {
-  const { data } = await api.get(`/api/notes`, {
-    params: tag ? { tag } : {},
-    headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_URL}`,
-    },
-  });
-
-  return data.notes;
 }
 
 export type RegisterRequest = {
   email: string;
   password: string;
-  userName: string;
+  username: string;
 };
 
 export const register = async (registerData: RegisterRequest) => {
@@ -129,7 +90,6 @@ export const logout = async (): Promise<void> => {
 };
 
 export interface EditUserBody {
-  email?: string;
   username: string;
 }
 
