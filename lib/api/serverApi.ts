@@ -17,7 +17,8 @@ export const checkServerSession = async () => {
 
 export const getServerMe = async (): Promise<User> => {
   const cookieStore = await cookies();
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/me`, {
+  const res = await fetch(`${process.env.VERCEL_URL ?? 'http://localhost:3000'}/api/users/me`, {
+    // const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/me`, {
     headers: {
       Cookie: cookieStore.toString(),
     },
